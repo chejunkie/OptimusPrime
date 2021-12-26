@@ -15,7 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SimplexNelderMead\SimplexNelderMead.csproj" />
+    <ProjectReference Include="..\MultiSwarm\MultiSwarm.csproj" />
+    <ProjectReference Include="..\Optimization.BenchmarkFunctions\Optimization.BenchmarkFunctions.csproj" />
+    <ProjectReference Include="..\Optimization.Infrastructure\Optimization.Infrastructure.csproj" />
+    <ProjectReference Include="..\ParticleSwarm\ParticleSwarm.csproj" />
+    <ProjectReference Include="..\SimplexNelderMead\Amoeba.csproj" />
   </ItemGroup>
 
 </Project>

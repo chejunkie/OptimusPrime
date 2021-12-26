@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimplexNelderMead
+namespace Optimization.Infrastructure
 {
     public interface IObjectiveFunction
     {
-        double Evaluate(double[] vector);
+        int Dim { get; }
+        double EvaluateAt(double[] point);
     }
 }

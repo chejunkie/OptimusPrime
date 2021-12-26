@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Optimization.Infrastructure;
 using SimplexNelderMead;
 
 namespace Optimization.Tests
@@ -6,6 +7,8 @@ namespace Optimization.Tests
     [TestClass]
     public class AmoebaTests
     {
+        // <image url="$(SolutionDir)Images\AmoebaOptimization.jpg" scale="0.4" />
+        
         [TestMethod]
         public void Amoeba_Rosenbrock_Solves()
         {
@@ -18,7 +21,7 @@ namespace Optimization.Tests
             int maxLoop = 1000;
 
             // Act
-            Amoeba amoeba = new Amoeba(aux, amoebaSize, dim, minX, maxX, maxLoop);
+            IOptimizer amoeba = new AmoebaOptimizer(aux, amoebaSize, dim, minX, maxX, maxLoop);
             ISolution solution = amoeba.Solve();
 
             // Assert
