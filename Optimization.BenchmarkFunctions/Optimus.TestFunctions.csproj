@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Optimization.Infrastructure\Optimus.Core.csproj" />
+  </ItemGroup>
+
 </Project>

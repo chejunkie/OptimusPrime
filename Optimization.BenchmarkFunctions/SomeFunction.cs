@@ -1,6 +1,6 @@
-﻿using Optimization.Infrastructure;
+﻿using Optimus.Core;
 
-namespace Optimization.Tests
+namespace Optimus.TestFunctions
 {
     public class SomeFunction : IObjectiveFunction
     {

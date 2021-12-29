@@ -1,11 +1,11 @@
-﻿using Optimization.Infrastructure;
+﻿using Optimus.Core;
+using Optimus.Domain;
 
-namespace ParticleSwarm
+namespace Optimus.ParticleSwarm
 {
     public class ParticleSwarmOptimizer : Optimizer
-    {
-        // TODO: kill off non-performers and rebirth at new random location.
-
+    { 
+        // TODO: kill off non-performers (or randomly kill off) and rebirth at new random location.
         private static Random Randomizer = new Random(1);
 
         private readonly int NumberParticles;
@@ -14,15 +14,10 @@ namespace ParticleSwarm
         private readonly double MinX;
         private readonly double MaxX;
 
-        //private ParticleSolution[] Swarm; 
         private Swarm Swarm;
-        private double[]? BestGlobalPosition;
-        private double BestGlobalValue;
-        //? private Particle BestParticle;
-        private readonly double MinVelocity;
-        private readonly double MaxVelocity;
+        private Particle _best;
 
-        public ParticleSwarmOptimizer(IObjectiveFunction aux, int dim, double minX, double maxX, 
+        public ParticleSwarmOptimizer(IObjectiveFunction aux, int dim, double minX, double maxX,
             int numberParticles, long maxLoop) : base(aux)
         {
             NumberParticles = numberParticles;
@@ -30,61 +25,19 @@ namespace ParticleSwarm
             Dim = dim;
             MinX = minX;
             MaxX = maxX;
-            MinVelocity = -1.0 * maxX;
-            MaxVelocity = maxX;
-
-            KickHive(); // initialize swarm
-        }
-
-        private void KickHive()
-        {
+            //x MinVelocity = -1.0 * maxX;
+            //x MaxVelocity = maxX;
+            _best = new Particle(aux, dim, minX, maxX);
+            
+            // Kick the hive!
             Swarm = new Swarm(ObjectiveFunction, NumberParticles, Dim, MinX, MaxX);
-            BestGlobalPosition = new double[Dim];
-            Swarm.BestSwarmPosition.CopyTo(BestGlobalPosition, 0);
-            BestGlobalValue = Swarm.BestSwarmValue;
+            if (Swarm.Best.Value < Best.Value)
+            {
+                Best.Move(Swarm.Best.Position());
+            }
         }
 
-        //private void KickHive()
-        //{
-        //    //TODO: use swarm class?
-        //    Swarm = new ParticleSolution[NumberParticles];
-
-        //    //TODO: simplify - best particle?
-        //    BestGlobalPosition = new double[Dim];
-        //    BestGlobalValue = double.MaxValue;
-
-        //    for (int i = 0; i < Swarm.Length; ++i) // initialize each Particle in the swarm
-        //    {
-        //        // Random position (starting parameter values)
-        //        double[] randomPosition = new double[Dim];
-        //        for (int j = 0; j < randomPosition.Length; ++j)
-        //        {
-        //            double lo = MinX;
-        //            double hi = MaxX;
-        //            randomPosition[j] = (hi - lo) * Randomizer.NextDouble() + lo;
-        //        }
-        //        double fitness = ObjectiveFunction.EvaluateAt(randomPosition);
-
-        //        /* Velocity indicates where particle will move next,
-        //        /* and is added to the position. */
-        //        double[] randomVelocity = new double[Dim];
-        //        for (int j = 0; j < randomVelocity.Length; ++j)
-        //        {
-        //            double lo = -1.0 * Math.Abs(MaxX - MinX);
-        //            double hi = Math.Abs(MaxX - MinX);
-        //            randomVelocity[j] = (hi - lo) * Randomizer.NextDouble() + lo;
-        //        }
-        //        //! Swarm[i] = new Particle(randomPosition, fitness, randomVelocity, randomPosition, fitness);
-        //        Swarm[i] = new ParticleSolution(ObjectiveFunction, randomPosition, randomVelocity);
-
-        //        // does current Particle have global best position/solution?
-        //        if (Swarm[i].Value < BestGlobalValue)
-        //        {
-        //            BestGlobalValue = Swarm[i].Value;
-        //            Swarm[i].Vector.CopyTo(BestGlobalPosition, 0);
-        //        }
-        //    } 
-        //}
+        public Particle Best => _best;
 
         public override ISolution Solve()
         {
@@ -109,59 +62,65 @@ namespace ParticleSwarm
             while (iteration < MaxLoop)
             {
                 ++iteration;
-                w = wMax - (wMax - wMin) * iteration / MaxLoop;
+                w = wMax - (wMax - wMin) * iteration / MaxLoop; //! automatically scale inertia weight
                 double[] newVelocity = new double[Dim];
                 double[] newPosition = new double[Dim];
                 double newFitness;
 
                 for (int i = 0; i < Swarm.Length; ++i) // each Particle
                 {
-                    ParticleSolution currP = Swarm[i];
+                    Particle currP = Swarm[i];
 
-                    for (int j = 0; j < currP.Velocity.Length; ++j) // each x value of the velocity
+                    // Calcualte new velocity (~momentum)
+                    for (int j = 0; j < currP.Velocity.Length; ++j)
                     {
                         r1 = Randomizer.NextDouble();
                         r2 = Randomizer.NextDouble();
 
-                        newVelocity[j] = (w * currP.Velocity[j]) +
-                          (c1 * r1 * (currP.BestPosition[j] - currP.Vector[j])) +
-                          (c2 * r2 * (BestGlobalPosition[j] - currP.Vector[j]));
+                        newVelocity[j] = (w * currP.Velocity[j]) 
+                            + (c1 * r1 * (currP.Best[j] - currP[j])) 
+                            + (c2 * r2 * (Best[j] - currP[j]));
 
-                        if (newVelocity[j] < MinVelocity)
-                            newVelocity[j] = MinVelocity;
-                        else if (newVelocity[j] > MaxVelocity)
-                            newVelocity[j] = MaxVelocity;
+                        if (newVelocity[j] < MinX)
+                        {
+                            newVelocity[j] = MinX;
+                        }
+                        else if (newVelocity[j] > MaxX)
+                        {
+                            newVelocity[j] = MaxX;
+                        }
                     }
 
+                    // Calculate new position by adding velocity to current position
                     newVelocity.CopyTo(currP.Velocity, 0);
 
-                    for (int j = 0; j < currP.Vector.Length; ++j)
+                    for (int j = 0; j < currP.Length; ++j)
                     {
-                        newPosition[j] = currP.Vector[j] + newVelocity[j];
+                        newPosition[j] = currP[j] + newVelocity[j];
                         if (newPosition[j] < MinX)
+                        {
                             newPosition[j] = MinX;
+                        }
                         else if (newPosition[j] > MaxX)
+                        {
                             newPosition[j] = MaxX;
+                        }
                     }
 
-                    currP.CopyFrom(newPosition);
-                    newFitness = currP.Value; 
+                    // Is the new position better?
+                    currP.Move(newPosition);
 
-                    //TODO: automatically check and update BestPosition/Value after CopyFrom
-                    if (newFitness < currP.BestValue)
+                    if (currP.Value < currP.Best.Value)
                     {
-                        newPosition.CopyTo(currP.BestPosition, 0);
-                        currP.BestValue = newFitness;
+                        currP.Best.Move(newPosition);
                     }
-                    if (newFitness < BestGlobalValue)
+                    if (currP.Value < Best.Value)
                     {
-                        newPosition.CopyTo(BestGlobalPosition, 0);
-                        BestGlobalValue = newFitness;
+                        Best.Move(newPosition);
                     }
                 }
             }
-            ParticleSolution solution = new ParticleSolution(ObjectiveFunction, BestGlobalPosition);
-            return solution;
+            return Best.Clone();
         }
     }
 }

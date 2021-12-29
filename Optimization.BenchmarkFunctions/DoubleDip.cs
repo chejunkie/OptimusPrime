@@ -1,11 +1,6 @@
-﻿using Optimization.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Optimus.Core;
 
-namespace Optimization.Tests
+namespace Optimus.TestFunctions
 {
     public class DoubleDip : IObjectiveFunction
     {

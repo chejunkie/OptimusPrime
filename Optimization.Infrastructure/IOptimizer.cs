@@ -1,4 +1,4 @@
-﻿namespace Optimization.Infrastructure
+﻿namespace Optimus.Core
 {
     public interface IOptimizer
     {

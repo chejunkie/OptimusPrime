@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Amoeba", "SimplexNelderMead\Amoeba.csproj", "{42FED9BC-105E-4220-9AEA-001CB63C1CDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.Amoeba", "SimplexNelderMead\Optimus.Amoeba.csproj", "{42FED9BC-105E-4220-9AEA-001CB63C1CDA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimization.Tests", "Optimization.Tests\Optimization.Tests.csproj", "{241860E6-600C-4749-87F1-BEA6F6A6AD55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.Tests", "Optimization.Tests\Optimus.Tests.csproj", "{241860E6-600C-4749-87F1-BEA6F6A6AD55}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParticleSwarmApp", "ParticleSwarmApp\ParticleSwarmApp.csproj", "{46964811-4F52-40D3-AD3B-7BA5E024D1AA}"
 EndProject
@@ -13,13 +13,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FireFlyApp", "FireFlyApp\Fi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiSwarmApp", "MultiSwarmApp\MultiSwarmApp.csproj", "{22EE7730-387F-4391-8BAF-4CD077D60C26}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimization.Infrastructure", "Optimization.Infrastructure\Optimization.Infrastructure.csproj", "{156CB3C7-81E0-414A-8A58-5DFEE57E5282}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.Core", "Optimization.Infrastructure\Optimus.Core.csproj", "{156CB3C7-81E0-414A-8A58-5DFEE57E5282}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParticleSwarm", "ParticleSwarm\ParticleSwarm.csproj", "{839C581F-624A-4C04-815B-160A4FA69251}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.ParticleSwarm", "ParticleSwarm\Optimus.ParticleSwarm.csproj", "{839C581F-624A-4C04-815B-160A4FA69251}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimization.BenchmarkFunctions", "Optimization.BenchmarkFunctions\Optimization.BenchmarkFunctions.csproj", "{9CD0D9C0-292C-4E00-9139-88A5D794DFDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.TestFunctions", "Optimization.BenchmarkFunctions\Optimus.TestFunctions.csproj", "{9CD0D9C0-292C-4E00-9139-88A5D794DFDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiSwarm", "MultiSwarm\MultiSwarm.csproj", "{2C90E2A5-C0FA-493B-91D2-1180805FE7CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.MultiSwarm", "MultiSwarm\Optimus.MultiSwarm.csproj", "{2C90E2A5-C0FA-493B-91D2-1180805FE7CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleConsoleApp", "SimpleConsoleApp\SimpleConsoleApp.csproj", "{606938C6-124D-431E-9860-7401B3AFA874}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.Domain", "Optimization.Domain\Optimus.Domain.csproj", "{9F7AC01E-CAB8-43F4-AB77-868D01351E1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +67,14 @@ Global
 		{2C90E2A5-C0FA-493B-91D2-1180805FE7CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C90E2A5-C0FA-493B-91D2-1180805FE7CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C90E2A5-C0FA-493B-91D2-1180805FE7CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{606938C6-124D-431E-9860-7401B3AFA874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{606938C6-124D-431E-9860-7401B3AFA874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{606938C6-124D-431E-9860-7401B3AFA874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{606938C6-124D-431E-9860-7401B3AFA874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F7AC01E-CAB8-43F4-AB77-868D01351E1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F7AC01E-CAB8-43F4-AB77-868D01351E1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F7AC01E-CAB8-43F4-AB77-868D01351E1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F7AC01E-CAB8-43F4-AB77-868D01351E1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

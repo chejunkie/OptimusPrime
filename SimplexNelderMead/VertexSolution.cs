@@ -4,7 +4,7 @@ namespace SimplexNelderMead
 {
     public class VertexSolution : Solution
     {
-        private static Random Randomizer = new Random(1);  // to allow creation of random solutions
+        private static Random Randomizer = new Random(0);  // to allow creation of random solutions
 
         public VertexSolution(IObjectiveFunction aux, double[] vector) : base(aux)
         {
@@ -22,15 +22,15 @@ namespace SimplexNelderMead
             CopyFrom(point);
         }
 
-        public VertexSolution(IObjectiveFunction aux, int dim, double[] minX, double[] maxX) : base(aux)
-        {
-            double[] point = new double[dim];
-            for (int i = 0; i < dim; i++)
-            {
-                point[i] = (maxX[i] - minX[i]) * Randomizer.NextDouble() + minX[i];
-            }
-            CopyFrom(point);
-        }
+        //public VertexSolution(IObjectiveFunction aux, int dim, double[] minX, double[] maxX) : base(aux)
+        //{
+        //    double[] point = new double[dim];
+        //    for (int i = 0; i < dim; i++)
+        //    {
+        //        point[i] = (maxX[i] - minX[i]) * Randomizer.NextDouble() + minX[i];
+        //    }
+        //    CopyFrom(point);
+        //}
 
         public override VertexSolution Clone()
         {

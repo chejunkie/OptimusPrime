@@ -1,17 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Optimization.BenchmarkFunctions;
-using Optimization.Infrastructure;
-using ParticleSwarm;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
+using Optimus.Core;
+using Optimus.TestFunctions;
+using Optimus.ParticleSwarm;
 
 namespace Optimization.Tests
 {
     [TestClass]
     public class ParticleSwarmTests
     {
-        // <image url="$(SolutionDir)Images\ParticleSwarmOptimization.jpg" scale="0.4" />
-
         [TestMethod]
         public void ParticleSwarm_Rosenbrock_Solves()
         {
@@ -21,33 +17,33 @@ namespace Optimization.Tests
             double minX = -100.0;
             double maxX = 100.0;
             long maxLoop = 1000;
-            int numberParticles = 50;
+            int numberParticles = 25;
 
             // Act
             IOptimizer pso = new ParticleSwarmOptimizer(aux, dim, minX, maxX, numberParticles, maxLoop);
             ISolution solution = pso.FormatSolution(pso.Solve());
 
             // Assert
-            CollectionAssert.AreEqual(new double[2] { 1, 1 }, solution.Vector);
+            CollectionAssert.AreEqual(new double[2] { 1, 1 }, solution.Position());
         }
 
         [TestMethod]
-        public void ParticleSwarm_Rastrigin_Solves()
+        public void ParticleSwarm_Rastrigin2D_Solves()
         {
             // Arrange
-            IObjectiveFunction aux = new Rastrigin();
+            IObjectiveFunction aux = new Rastrigin2D();
             int dim = aux.Dim;
             double minX = -100.0;
             double maxX = 100.0;
-            long maxLoop = 1000;
-            int numberParticles = 50; // more particles => better accuracy, but at the cost of performance
+            long maxLoop = 500;
+            int numberParticles = 25; // more particles => better accuracy, but at the cost of performance
 
             // Act
             IOptimizer pso = new ParticleSwarmOptimizer(aux, dim, minX, maxX, numberParticles, maxLoop);
-            ISolution solution = pso.FormatSolution(pso.Solve()); 
+            ISolution solution = pso.FormatSolution(pso.Solve());
 
             // Assert
-            CollectionAssert.AreEqual(new double[3] { 0.0, 0.0, 0.0 }, solution.Vector);
+            CollectionAssert.AreEqual(new double[2] { 0.0, 0.0 }, solution.Position());
         }
     }
 }

@@ -1,8 +1,6 @@
-﻿using Optimization.Infrastructure;
-using System;
-using System.Numerics;
+﻿using Optimus.Core;
 
-namespace Optimization.Tests
+namespace Optimus.TestFunctions
 {
     public class Rosenbrock : IObjectiveFunction
     {

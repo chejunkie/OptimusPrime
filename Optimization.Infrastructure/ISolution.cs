@@ -1,14 +1,13 @@
-﻿namespace Optimization.Infrastructure
+﻿namespace Optimus.Core
 {
     public interface ISolution
     {
+        public double this[int index] { get; set; }
+        public int Length { get; }
         double Value { get; }
 
-        double[] Vector { get; }
-
-        public double this[int index] { get; set; }
-
         public ISolution Clone();
-        public int Length { get; }
+        public ISolution Move(double[] newPosition);
+        double[] Position();
     }
 }

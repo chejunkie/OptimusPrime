@@ -1,8 +1,8 @@
-﻿using Optimization.Infrastructure;
+﻿using Optimus.Core;
 
-namespace Optimization.BenchmarkFunctions
+namespace Optimus.TestFunctions
 {
-    public class Rastrigin : IObjectiveFunction
+    public class Rastrigin3D : IObjectiveFunction
     {
         public int Dim => 3;
 

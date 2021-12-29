@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ParticleSolution.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Optimization.Domain\Optimus.Domain.csproj" />
+    <ProjectReference Include="..\Optimization.Infrastructure\Optimus.Core.csproj" />
+  </ItemGroup>
+
+</Project>

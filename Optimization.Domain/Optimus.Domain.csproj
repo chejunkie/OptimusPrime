@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Optimization.Infrastructure\Optimization.Infrastructure.csproj" />
+    <ProjectReference Include="..\Optimization.Infrastructure\Optimus.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace FireFlyApp
 {
-    class FireflyProgram
+    internal class FireflyProgram
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Begin firefly demo\n");
 
@@ -45,7 +44,7 @@ namespace FireFlyApp
             Console.ReadLine();
         }
 
-        static void ShowVector(double[] v, int dec, bool nl)
+        private static void ShowVector(double[] v, int dec, bool nl)
         {
             for (int i = 0; i < v.Length; ++i)
                 Console.Write(v[i].ToString("F" + dec) + " ");
@@ -53,7 +52,7 @@ namespace FireFlyApp
                 Console.WriteLine("");
         }
 
-        static double[] Solve(int numFireflies, int dim, int seed, int maxEpochs)
+        private static double[] Solve(int numFireflies, int dim, int seed, int maxEpochs)
         {
             // minX and maxX establish boundaries for each firefly's position.
             // The values used here are specific to Michalewicz function.
@@ -121,7 +120,7 @@ namespace FireFlyApp
                 {
                     for (int j = 0; j < numFireflies; ++j)
                     {
-                        if (swarm[i].Intensity < swarm[j].Intensity) 
+                        if (swarm[i].Intensity < swarm[j].Intensity)
                         {
                             // Move firefly[i] toward firefl[j]
                             /* In order to move a firefly toward another firefly with higher intesnity,
@@ -159,9 +158,9 @@ namespace FireFlyApp
                     }
                 }
 
-                /* After each pair of fireflies has been compared and less intense fireflies have moved toward more intense fireflies, 
+                /* After each pair of fireflies has been compared and less intense fireflies have moved toward more intense fireflies,
                  *  the array of FireFly objects is sorted from low error to high error so that the best one is at swarm[0]. */
-                /* Sorting the array of FireFly objects also has the imporant effect of changing their locaiton within the array 
+                /* Sorting the array of FireFly objects also has the imporant effect of changing their locaiton within the array
                  *  so that the objects are processed in a diferent order each time through th ewhile loop. */
                 Array.Sort(swarm); // low to high error.
                 if (swarm[0].Error < bestError)
@@ -177,7 +176,7 @@ namespace FireFlyApp
             return bestPosition;
         }
 
-        static double Distance(double[] posA, double[] posB)
+        private static double Distance(double[] posA, double[] posB)
         {
             double ssd = 0.0; // sum squared diffrences
             for (int i = 0; i < posA.Length; ++i)
@@ -185,7 +184,7 @@ namespace FireFlyApp
             return Math.Sqrt(ssd);
         }
 
-        static double Michalewicz(double[] xValues)
+        private static double Michalewicz(double[] xValues)
         {
             double result = 0.0;
             for (int i = 0; i < xValues.Length; ++i)
@@ -198,7 +197,7 @@ namespace FireFlyApp
             return -1.0 * result;
         }
 
-        static double Error(double[] xValues)
+        private static double Error(double[] xValues)
         {
             int dim = xValues.Length;
             double trueMin = 0.0;

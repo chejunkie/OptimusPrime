@@ -1,12 +1,13 @@
-﻿using System.Collections.ObjectModel;
+﻿using Optimus.Core;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 
-namespace Optimization.Infrastructure
+namespace Optimus.Domain
 {
     public class Solution : ISolution, IComparable<Solution>
     {
-        private static Random Randomizer = new Random(0);
+        protected static Random Randomizer = new Random(0);
 
         protected IObjectiveFunction Aux;
         private double _value = double.MaxValue;
@@ -16,7 +17,7 @@ namespace Optimization.Infrastructure
         public Solution(IObjectiveFunction aux, double[] vector)
         {
             Aux = aux;
-            _points.CollectionChanged += this.OnCollectionChanged;
+            _points.CollectionChanged += OnCollectionChanged;
             
             for (int i = 0; i < vector.Length; i++)
             {
@@ -29,7 +30,7 @@ namespace Optimization.Infrastructure
         public Solution(IObjectiveFunction aux, int dim, double minX, double maxX)
         {
             Aux = aux;
-            _points.CollectionChanged += this.OnCollectionChanged;
+            _points.CollectionChanged += OnCollectionChanged;
 
             for (int i = 0; i < dim; i++)
             {
@@ -39,13 +40,17 @@ namespace Optimization.Infrastructure
             UpdateValue=true;
         }
 
-        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
+            if (null == sender)
+            {
+                return;
+            }
             if (e.NewItems != null)
             {
                 foreach (Point newItem in e.NewItems)
                 {
-                    newItem.PropertyChanged += this.OnItemPropertyChanged;
+                    newItem.PropertyChanged += OnItemPropertyChanged;
                 }
             }
 
@@ -53,13 +58,17 @@ namespace Optimization.Infrastructure
             {
                 foreach (Point oldItem in e.OldItems)
                 {
-                    oldItem.PropertyChanged -= this.OnItemPropertyChanged;
+                    oldItem.PropertyChanged -= OnItemPropertyChanged;
                 }
             }
         }
 
-        private void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnItemPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
+            if (null == sender)
+            {
+                return;
+            }
             UpdateValue = true;
         }
 
@@ -90,15 +99,7 @@ namespace Optimization.Infrastructure
             }
         }
 
-        //x public void CopyFrom(double[] vector)
-        //x {
-        //x     for (int i = 0; i < vector.Length; i++)
-        //x     {
-        //x         this[i] = vector[i];
-        //x     }
-        //x }
-
-        public Solution Move(double[] newPosition)
+        public ISolution Move(double[] newPosition)
         {
             for (int i = 0; i < Length; i++)
             {
@@ -119,7 +120,7 @@ namespace Optimization.Infrastructure
 
         public virtual ISolution Clone()
         {
-            return new Solution(Aux, this.Position());
+            return new Solution(Aux, Position());
         }
 
         /// <summary>
@@ -130,11 +131,11 @@ namespace Optimization.Infrastructure
         /// <returns>
         /// A value that indicates the relative order of the objects being compared. The return value has these meanings:
         /// <list type="table"><listheader><term> Value</term><term> Meaning</term></listheader><item><description> Less than zero</description><description> This instance precedes <paramref name="other" /> in the sort order.</description></item><item><description> Zero</description><description> This instance occurs in the same position in the sort order as <paramref name="other" />.</description></item><item><description> Greater than zero</description><description> This instance follows <paramref name="other" /> in the sort order.</description></item></list></returns>
-        public int CompareTo(Solution other) // based on vector/solution value
+        public int CompareTo(Solution? other) // based on vector/solution value
         {
-            if (this.Value < other.Value)
+            if (other == null || Value < other.Value)
                 return -1; // this instance preceeds other in the sort order
-            else if (this.Value > other.Value)
+            else if (Value > other.Value)
                 return 1; // this value follows other in the sort order
             else
                 return 0; // this instance ocurrs in the same position in the sort order as other
@@ -142,12 +143,12 @@ namespace Optimization.Infrastructure
 
         public override string ToString()
         {
-            string s = "";
-            s += "Position [ ";
+            string s = "Solution [ ";
             for (int i = 0; i < Length; ++i)
+            {
                 s += this[i].ToString("F2") + " ";
-            s += "] ";
-            s += "Value = " + Value.ToString("F4");
+            }
+            s += "] => " + Value.ToString("F4");
             return s;
         }
     }

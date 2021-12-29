@@ -14,7 +14,7 @@ namespace MultiSwarm
                 int dim = 2;            // number of dimensions in the problem to be solved.
                 double minX = -100.0;   // low bound constraint
                 double maxX = 100.0;    // high bound constraint
-                int numParticles = 25;   // particles in each swarm
+                int numParticles = 12;   // particles in each swarm
                 int numSwarms = 5;      // swarms in multi-swarm
 
                 // Swarm = collection of particles.
@@ -24,7 +24,7 @@ namespace MultiSwarm
                 Console.WriteLine("\nInitial multiswarm:");
                 Console.WriteLine(ms.ToString());
 
-                int maxLoop = 500;
+                int maxLoop = 150;
                 ms.Solve(maxLoop);
                 
                 Console.WriteLine("\nFinal multiswarm:");
@@ -52,6 +52,14 @@ namespace MultiSwarm
             }
             return result;
         }
+
+        //public static double Cost(double[] position)
+        //{
+        //    double x = position[0];
+        //    double y = position[1];
+        //    double value = 100.0 * Math.Pow((y - x * x), 2) + Math.Pow(1 - x, 2);
+        //    return value;
+        //}
 
     }
 
@@ -169,6 +177,8 @@ namespace MultiSwarm
         public void Solve(int maxLoop)
         {
             int ct = 0;
+            //? double wMin = 0.5;
+            //? double wMax = 1;
             double w = 0.729; // inertia
             double c1 = 1.49445; // particle / cogntive
             double c2 = 1.49445; // swarm / social
@@ -194,6 +204,9 @@ namespace MultiSwarm
                         {
                             Immigration(i, j); // swap curr particle with a random particle in diff swarm
                         }
+
+                        //! automatically scale inertia weight
+                        //? w = wMax - (wMax - wMin) * (ct + i * 25 + j) / (500 + 5 * 25);
 
                         for (int k = 0; k < Dim; ++k) // update velocity. each x position component
                         {

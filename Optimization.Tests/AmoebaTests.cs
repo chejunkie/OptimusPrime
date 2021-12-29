@@ -1,14 +1,13 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Optimization.Infrastructure;
-using SimplexNelderMead;
+using Optimus.Core;
+using Optimus.TestFunctions;
+using Optimus.Amoeba;
 
 namespace Optimization.Tests
 {
     [TestClass]
     public class AmoebaTests
     {
-        // <image url="$(SolutionDir)Images\AmoebaOptimization.jpg" scale="0.4" />
-        
         [TestMethod]
         public void Amoeba_Rosenbrock_Solves()
         {
@@ -25,7 +24,7 @@ namespace Optimization.Tests
             ISolution solution = amoeba.Solve();
 
             // Assert
-            CollectionAssert.AreEqual(new double[2] { 1, 1 }, solution.Vector);
+            CollectionAssert.AreEqual(new double[2] { 1, 1 }, solution.Position());
         }
     }
 }

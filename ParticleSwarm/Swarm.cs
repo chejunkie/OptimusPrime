@@ -6,17 +6,19 @@ namespace ParticleSwarm
     {
         private static Random Randomizer = new Random(1);
 
-        public ParticleSolution[] Particles;
-        public double[] BestSwarmPosition;
-        public double BestSwarmValue;
+        public Particle[] Particles;
+        private Particle _best;
+
+        //x public double[] BestSwarmPosition;
+        //x public double BestSwarmValue;
 
         public Swarm(IObjectiveFunction aux, int numberParticles, int dim, double minX, double maxX)
         {
-            Particles = new ParticleSolution[numberParticles];
+            Particles = new Particle[numberParticles];
 
             //TODO: simplify - best particle?
-            BestSwarmPosition = new double[dim];
-            BestSwarmValue = double.MaxValue;
+            //? BestSwarmPosition = new double[dim];
+            //? BestSwarmValue = double.MaxValue;
 
             for (int i = 0; i < numberParticles; ++i) // initialize each Particle in the swarm
             {
@@ -39,21 +41,26 @@ namespace ParticleSwarm
                     double hi = Math.Abs(maxX - minX);
                     randomVelocity[j] = (hi - lo) * Randomizer.NextDouble() + lo;
                 }
-                Particles[i] = new ParticleSolution(aux, randomPosition, randomVelocity);
+                Particles[i] = new Particle(aux, randomPosition, randomVelocity);
 
                 // does current Particle have global best position/solution?
-                if (Particles[i].Value < BestSwarmValue)
+                if (null == _best)
                 {
-                    BestSwarmValue = Particles[i].Value;
-                    Particles[i].Vector.CopyTo(BestSwarmPosition, 0);
+                    _best = Particles[i].Clone();
+                }
+                if (Particles[i].Value < Best.Value)
+                {
+                    Best.Move(randomPosition);
                 }
             }
         }
 
-        public ParticleSolution this[int index]
+        public Particle this[int index]
         {
             get => Particles[index];
         }
+
+        public Particle Best => _best;
 
         public int Length
         {
@@ -66,10 +73,10 @@ namespace ParticleSwarm
             for (int i = 0; i < Particles.Length; ++i)
                 s += "[" + i + "] " + Particles[i].ToString() + "\n";
             s += "BestSwarPosition [ ";
-            for (int i = 0; i < BestSwarmPosition.Length; ++i)
-                s += BestSwarmPosition[i].ToString("F2") + " ";
+            for (int i = 0; i < Best.Length; ++i)
+                s += Best[i].ToString("F2") + " ";
             s += "] ";
-            s += "BestSwarmValue = " + BestSwarmValue.ToString("F3");
+            s += "BestSwarmValue = " + Best.Value.ToString("F3");
             s += "\n";
             return s;
         }
