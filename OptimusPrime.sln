@@ -3,27 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.Amoeba", "SimplexNelderMead\Optimus.Amoeba.csproj", "{42FED9BC-105E-4220-9AEA-001CB63C1CDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.Amoeba", "Optimus.Amoeba\Optimus.Amoeba.csproj", "{42FED9BC-105E-4220-9AEA-001CB63C1CDA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.Tests", "Optimization.Tests\Optimus.Tests.csproj", "{241860E6-600C-4749-87F1-BEA6F6A6AD55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.Tests", "Optimus.Tests\Optimus.Tests.csproj", "{241860E6-600C-4749-87F1-BEA6F6A6AD55}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParticleSwarmApp", "ParticleSwarmApp\ParticleSwarmApp.csproj", "{46964811-4F52-40D3-AD3B-7BA5E024D1AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.Core", "Optimus.Infrastructure\Optimus.Core.csproj", "{156CB3C7-81E0-414A-8A58-5DFEE57E5282}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FireFlyApp", "FireFlyApp\FireFlyApp.csproj", "{122477ED-A514-4779-AC27-01D9EFDB0ED4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.ParticleSwarm", "Optimus.ParticleSwarm\Optimus.ParticleSwarm.csproj", "{839C581F-624A-4C04-815B-160A4FA69251}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiSwarmApp", "MultiSwarmApp\MultiSwarmApp.csproj", "{22EE7730-387F-4391-8BAF-4CD077D60C26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.TestFunctions", "Optimus.TestFunctions\Optimus.TestFunctions.csproj", "{9CD0D9C0-292C-4E00-9139-88A5D794DFDB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.Core", "Optimization.Infrastructure\Optimus.Core.csproj", "{156CB3C7-81E0-414A-8A58-5DFEE57E5282}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.ParticleSwarm", "ParticleSwarm\Optimus.ParticleSwarm.csproj", "{839C581F-624A-4C04-815B-160A4FA69251}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.TestFunctions", "Optimization.BenchmarkFunctions\Optimus.TestFunctions.csproj", "{9CD0D9C0-292C-4E00-9139-88A5D794DFDB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.MultiSwarm", "MultiSwarm\Optimus.MultiSwarm.csproj", "{2C90E2A5-C0FA-493B-91D2-1180805FE7CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.MultiSwarm", "Optimus.MultiSwarm\Optimus.MultiSwarm.csproj", "{2C90E2A5-C0FA-493B-91D2-1180805FE7CD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleConsoleApp", "SimpleConsoleApp\SimpleConsoleApp.csproj", "{606938C6-124D-431E-9860-7401B3AFA874}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.Domain", "Optimization.Domain\Optimus.Domain.csproj", "{9F7AC01E-CAB8-43F4-AB77-868D01351E1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.Domain", "Optimus.Domain\Optimus.Domain.csproj", "{9F7AC01E-CAB8-43F4-AB77-868D01351E1F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Optimus.Firefly", "Optimus.FireFly\Optimus.Firefly.csproj", "{1B1C8689-9612-438E-8EFA-1254EEEC1CC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,18 +35,6 @@ Global
 		{241860E6-600C-4749-87F1-BEA6F6A6AD55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{241860E6-600C-4749-87F1-BEA6F6A6AD55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{241860E6-600C-4749-87F1-BEA6F6A6AD55}.Release|Any CPU.Build.0 = Release|Any CPU
-		{46964811-4F52-40D3-AD3B-7BA5E024D1AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{46964811-4F52-40D3-AD3B-7BA5E024D1AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{46964811-4F52-40D3-AD3B-7BA5E024D1AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{46964811-4F52-40D3-AD3B-7BA5E024D1AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{122477ED-A514-4779-AC27-01D9EFDB0ED4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{122477ED-A514-4779-AC27-01D9EFDB0ED4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{122477ED-A514-4779-AC27-01D9EFDB0ED4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{122477ED-A514-4779-AC27-01D9EFDB0ED4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{22EE7730-387F-4391-8BAF-4CD077D60C26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22EE7730-387F-4391-8BAF-4CD077D60C26}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22EE7730-387F-4391-8BAF-4CD077D60C26}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22EE7730-387F-4391-8BAF-4CD077D60C26}.Release|Any CPU.Build.0 = Release|Any CPU
 		{156CB3C7-81E0-414A-8A58-5DFEE57E5282}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{156CB3C7-81E0-414A-8A58-5DFEE57E5282}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{156CB3C7-81E0-414A-8A58-5DFEE57E5282}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,6 +59,10 @@ Global
 		{9F7AC01E-CAB8-43F4-AB77-868D01351E1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F7AC01E-CAB8-43F4-AB77-868D01351E1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F7AC01E-CAB8-43F4-AB77-868D01351E1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B1C8689-9612-438E-8EFA-1254EEEC1CC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B1C8689-9612-438E-8EFA-1254EEEC1CC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B1C8689-9612-438E-8EFA-1254EEEC1CC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B1C8689-9612-438E-8EFA-1254EEEC1CC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
