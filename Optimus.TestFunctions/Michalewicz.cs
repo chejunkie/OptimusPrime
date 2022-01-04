@@ -7,24 +7,38 @@ namespace Optimus.TestFunctions
         // dim = 2, global best (2.20319, 1.57049) => -1.8013
         // dim = 5, global best (2.2029 1.5707, 1.2850, 1.9231, 1.7205) => -4.6877
 
-        public double EvaluateAt(double[] point)
+        private readonly bool EvaluateError = false;  
+
+        Michalewicz(bool evaluateError = false)
         {
-            double trueMin = GlobalMinimum(point.Length);
-            double calculated = MichalewiczFunction(point);
+            EvaluateError = evaluateError;
+        }
+
+        public double ErrorAt(double[] position)
+        {
+            double calculated = MichalewiczFunction(position);
+            double trueMin = GlobalMinimum(position.Length);
             return (trueMin - calculated) * (trueMin - calculated);
+        }
+
+        public double EvaluateAt(double[] position)
+        {
+            if (true == EvaluateError)
+            {
+                return ErrorAt(position);
+            }
+            return MichalewiczFunction(position);
         }
 
         public double GlobalMinimum(int dim)
         {
             if (2 == dim)
             {
-                return 0;
-                //x return -1.8013;
+                return -1.8013;
             }
             if (5 == dim)
             {
-                return 0;
-                //x return -4.6877;
+                return -4.6877;
             }
             throw new NotImplementedException();
         }
@@ -42,7 +56,7 @@ namespace Optimus.TestFunctions
             throw new NotImplementedException();
         }
 
-        private static double MichalewiczFunction(double[] points)
+        public double MichalewiczFunction(double[] points)
         {
             double result = 0.0;
             for (int i = 0; i < points.Length; ++i)

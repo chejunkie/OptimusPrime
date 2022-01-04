@@ -6,18 +6,31 @@ namespace Optimus.TestFunctions
     {
         // Minimum = 0, x = (0...0)
 
-        public double GlobalMinimum => 0;
+        private readonly bool EvaluateError = false;
+
+        Rastrigin(bool evaluateError = false)
+        {
+            EvaluateError = evaluateError;
+        }
+
+        public double ErrorAt(double[] position)
+        {
+            double calculated = RastriginFunction(position);
+            double trueMin = GlobalMinimum;
+            return (trueMin - calculated) * (trueMin - calculated);
+        }
+
 
         public double EvaluateAt(double[] position)
         {
-            double result = 0.0;
-            for (int i = 0; i < position.Length; ++i)
+            if (true == EvaluateError)
             {
-                double xi = position[i];
-                result += (xi * xi) - (10 * Math.Cos(2 * Math.PI * xi)) + 10;
+                return ErrorAt(position);
             }
-            return result;
+            return RastriginFunction(position);
         }
+
+        public double GlobalMinimum => 0;
 
         public double[] GlobalPosition(int dim)
         {
@@ -27,6 +40,17 @@ namespace Optimus.TestFunctions
                 position[i] = 0;
             }
             return position;
+        }
+
+        private double RastriginFunction(double[] position)
+        {
+            double result = 0.0;
+            for (int i = 0; i < position.Length; ++i)
+            {
+                double xi = position[i];
+                result += (xi * xi) - (10 * Math.Cos(2 * Math.PI * xi)) + 10;
+            }
+            return result;
         }
     }
 }

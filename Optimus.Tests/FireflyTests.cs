@@ -52,6 +52,7 @@ namespace Optimus.Tests
             IOptimizer fa = new FireflyOptimizer(aux, dim, minX, maxX, numberFireflys, maxLoop);
             ISolution solution = fa.FormatSolution(fa.Solve());
             double fitness = aux.EvaluateAt(solution.Position());
+            double value = aux.MichalewiczFunction(solution.Position());
 
             // Assert
             double delta = (solution.Value - aux.GlobalMinimum(dim));

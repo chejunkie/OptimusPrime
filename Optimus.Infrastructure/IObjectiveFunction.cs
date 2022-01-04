@@ -2,6 +2,6 @@
 {
     public interface IObjectiveFunction
     {
-        double EvaluateAt(double[] point);
+        double EvaluateAt(double[] position);
     }
 }

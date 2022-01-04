@@ -8,10 +8,10 @@ namespace Optimus.TestFunctions
 
         public double GlobalMinimum => 0;
 
-        public double EvaluateAt(double[] point)
+        public double EvaluateAt(double[] position)
         {
-            double x = point[0];
-            double y = point[1];
+            double x = position[0];
+            double y = position[1];
             double value = 100.0 * Math.Pow((y - x * x), 2) + Math.Pow(1 - x, 2);
             return value;
         }
