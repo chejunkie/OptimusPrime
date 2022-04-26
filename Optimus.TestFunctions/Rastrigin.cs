@@ -1,4 +1,5 @@
 ﻿using Optimus.Core;
+using System;
 
 namespace Optimus.TestFunctions
 {
@@ -8,7 +9,7 @@ namespace Optimus.TestFunctions
 
         private readonly bool EvaluateError = false;
 
-        Rastrigin(bool evaluateError = false)
+        public Rastrigin(bool evaluateError = false)
         {
             EvaluateError = evaluateError;
         }

@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Optimus.Domain
+namespace Optimization.Infrastructure
 {
     // Implementing INotifyPropertyChanged - does a better way exist?
     // https://stackoverflow.com/questions/1315621/implementing-inotifypropertychanged-does-a-better-way-exist

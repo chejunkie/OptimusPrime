@@ -1,13 +1,9 @@
-﻿using Optimus.Core;
-using System;
-
-namespace Optimus.Domain
+﻿namespace Optimization.Infrastructure
 {
     public abstract class Optimizer : IOptimizer
     {
         private double _tolerance;
         private int _sigFigs;
-        private static readonly long NegativeZeroBits = BitConverter.DoubleToInt64Bits(-0.0);
 
         public Optimizer(IObjectiveFunction aux)
         {
@@ -58,24 +54,13 @@ namespace Optimus.Domain
 
         public ISolution FormatSolution(ISolution solution)
         {
-            double[] newPosition = solution.Position();
-            for (int i = 0; i < solution.Dim; i++)
+            for (int i = 0; i < solution.Length; i++)
             {
-                newPosition[i] = Math.Round(solution[i], SigFigs);
-
-                if (IsNegativeZero(newPosition[i]))
-                {
-                    newPosition[i] = Math.Abs(newPosition[i]);
-                }
+                solution[i] = Math.Round(solution[i], SigFigs);
             }
-            return solution.Move(newPosition);
+            return solution;
         }
 
         public abstract ISolution Solve();
-
-        private static bool IsNegativeZero(double x)
-        {
-            return BitConverter.DoubleToInt64Bits(x) == NegativeZeroBits;
-        }
     }
 }

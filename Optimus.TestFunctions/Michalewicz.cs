@@ -1,4 +1,5 @@
 ﻿using Optimus.Core;
+using System;
 
 namespace Optimus.TestFunctions
 {
@@ -9,7 +10,7 @@ namespace Optimus.TestFunctions
 
         private readonly bool EvaluateError = false;  
 
-        Michalewicz(bool evaluateError = false)
+        public Michalewicz(bool evaluateError = false)
         {
             EvaluateError = evaluateError;
         }
