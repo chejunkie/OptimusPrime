@@ -2,6 +2,7 @@
 using Optimus.Firefly;
 using Optimus.Core;
 using Optimus.TestFunctions;
+using System.Diagnostics;
 
 namespace Optimus.Tests
 {
@@ -30,8 +31,13 @@ namespace Optimus.Tests
             {
                 bSuccess = true;
             }
+            Debug.WriteLine("");
+            Debug.WriteLine($"Calculated fitness = { solution.Value }");
+            Debug.WriteLine($"Expected fitness   = { aux.GlobalMinimum(dim) }");
+            Debug.WriteLine("------------------------------------");
+            Debug.WriteLine($"Difference         = { delta }");
+
             Assert.AreEqual(true, bSuccess);
-            //? CollectionAssert.AreEqual(aux.GlobalPosition(dim), solution.Position());
         }
 
         [TestMethod]
@@ -61,8 +67,13 @@ namespace Optimus.Tests
             {
                 bSuccess = true;
             }
+            Debug.WriteLine("");
+            Debug.WriteLine($"Calculated fitness = { solution.Value }");
+            Debug.WriteLine($"Expected fitness   = { aux.GlobalMinimum(dim) }");
+            Debug.WriteLine("------------------------------------");
+            Debug.WriteLine($"Difference         = { delta }");
+
             Assert.AreEqual(true, bSuccess);
-            //? CollectionAssert.AreEqual(aux.GlobalPosition(dim), solution.Position());
         }
     }
 }
